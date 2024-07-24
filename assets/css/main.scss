@@ -1,0 +1,38 @@
+@import "/assets/ui/scrollbar.scss";
+
+// Define global variables
+:root {
+  --main-border: 10px;
+  --primary-color: #007bff;
+}
+
+html,
+body,
+#__nuxt {
+  height: 100%;
+}
+
+// Form
+.form,
+form {
+  $self: &;
+  &__title {
+    @apply text-black text-center text-xl font-semibold;
+  }
+
+  .el-form-item__label {
+    @apply text-black;
+  }
+}
+
+.el-dialog {
+  @apply rounded-lg #{!important};
+}
+
+.text-primary {
+  @apply text-[--primary-color] uppercase text-2xl font-bold;
+}
+
+.sub-primary {
+  @apply text-[--primary-color] uppercase text-lg font-bold;
+}
