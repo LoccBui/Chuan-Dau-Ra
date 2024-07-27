@@ -1,20 +1,19 @@
 <script lang="ts" setup>
-export interface Props {
+interface Props {
     isOpenModal: boolean
     title?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
     isOpenModal: false,
-    title: 'Xóa',
+    title: 'Bạn có muốn xóa dữ liệu ?',
 })
 
 const centerDialogVisible = computed(() => props.isOpenModal)
-const emit = defineEmits(['closeModal'])
+const emit = defineEmits(['closeModal', 'confirmDelete'])
 
 const confirm = () => {
-    emit('closeModal')
-
+    emit('confirmDelete')
 }
 
 const closeModal = () => {
@@ -29,7 +28,7 @@ const closeModal = () => {
             <div class="dialog-footer">
                 <el-button @click="closeModal">Hủy</el-button>
                 <el-button type="danger" @click="confirm">
-                    Xác nhận
+                    Xóa
                 </el-button>
             </div>
         </template>

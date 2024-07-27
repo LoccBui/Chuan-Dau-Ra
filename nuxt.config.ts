@@ -8,6 +8,14 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
     "nuxt-icon",
+    [
+      "@nuxtjs/google-fonts",
+      {
+        families: {
+          Montserrat: true,
+        },
+      },
+    ],
   ],
   runtimeConfig: {
     public: {

@@ -1,5 +1,6 @@
 import { acceptHMRUpdate, defineStore } from "pinia"
 import { useDomain } from "~/lib/domain"
+import { useGuiStore } from "./gui.store"
 
 type AuthRootState = {
   isLoggedIn: boolean
@@ -19,23 +20,30 @@ export const useAuthStore = defineStore({
     } as AuthRootState),
   actions: {
     async login(username: string, password: string) {
-      const domain = useDomain()
-      const isLoading = ref(false)
+      try {
+        const domain = useDomain()
+        const isLoading = ref(false)
+        const res = await $fetch(domain.apiBase + "/login", {
+          method: "POST",
+          body: {
+            username,
+            password,
+          },
+        })
 
-      const { data, status } = await useFetch(domain.apiBase + "/login", {
-        method: "POST",
-        body: {
-          username,
-          password,
-        },
-      })
+        if (res) {
+          this.isLoggedIn = true
+          isLoading.value = true
+        }
 
-      if (status.value === "success") {
-        this.isLoggedIn = true
-        isLoading.value = true
+        return isLoading
+      } catch (error) {
+        console.error(error)
+        useGuiStore().showToast(
+          "Đăng nhập thất bại, vui lòng thử lại sau",
+          "error"
+        )
       }
-
-      return isLoading
     },
 
     logOut() {

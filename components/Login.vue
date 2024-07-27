@@ -22,48 +22,43 @@ const rules = reactive({
 
 const submitForm = async () => {
     if (!ruleFormRef.value) return
-    await ruleFormRef.value.validate(async (valid, fields) => {
+    await ruleFormRef.value.validate(async (valid: boolean) => {
         if (valid) {
             isLoading.value = true
             const res = await auth.login(form.username, form.password)
 
-            if (res.value) {
-                isLoading.value = false
+            if (res) {
                 navigateTo("/dashboard/plo-va-pi")
-            } else {
-                isLoading.value = false
             }
+
+            isLoading.value = false
         }
     })
 }
 </script>
 
 <template>
-    <div class="wrapper">
-        <div class="text-primary">Đăng nhập</div>
+    <div class="min-w-96 w-full h-full flex flex-col items-center justify-center px-4 gap-4 text-center">
+        <div class="text-primary">Chuẩn đầu ra</div>
 
-        <el-form ref="ruleFormRef" :rules="rules" label-position="top" label-width="auto" :model="form" status-icon>
-            <el-form-item label="Tài khoản" prop="username">
+        <div class="tracking-widest">Dẫn đầu công nghệ</div>
+
+        <el-divider class="!m-0" />
+
+
+        <el-form class="w-full" ref="ruleFormRef" :rules="rules" label-position="top" label-width="auto" :model="form"
+            status-icon>
+            <el-form-item label="Tài khoản" prop="username" class="w-full">
                 <el-input placeholder="Nhập tài khoản" v-model="form.username" autofocus @keyup.enter="submitForm" />
             </el-form-item>
-            <el-form-item label="Mật khẩu" prop="password">
+            <el-form-item label="Mật khẩu" prop="password" class="w-full">
                 <el-input placeholder="Nhập mật khẩu" type="password" show-password v-model="form.password"
                     @keyup.enter="submitForm" />
             </el-form-item>
         </el-form>
 
-        <el-button size="large" :loading="isLoading" class="action" type="primary" @click="submitForm">Đăng
-            nhập</el-button>
+        <el-button size="large" :loading="isLoading" class="w-full" type="primary" @click="submitForm">
+            Đăng nhập
+        </el-button>
     </div>
 </template>
-
-<style lang="scss" scoped>
-.wrapper {
-    @apply w-full h-full flex flex-col items-center justify-center p-4 gap-4;
-
-    form,
-    .action {
-        @apply w-full;
-    }
-}
-</style>

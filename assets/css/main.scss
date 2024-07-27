@@ -1,5 +1,10 @@
 @import "/assets/ui/scrollbar.scss";
 
+// Get all tailwind css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 // Define global variables
 :root {
   --main-border: 10px;
@@ -9,7 +14,8 @@
 html,
 body,
 #__nuxt {
-  height: 100%;
+  font-family: "Montserrat", sans-serif;
+  @apply bg-[url('/img/background.webp')] h-full;
 }
 
 // Form
@@ -34,5 +40,5 @@ form {
 }
 
 .sub-primary {
-  @apply text-[--primary-color] uppercase text-lg font-bold;
+  @apply text-[--primary-color] uppercase text-lg font-bold mb-5;
 }
