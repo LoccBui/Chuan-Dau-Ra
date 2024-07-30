@@ -1,48 +1,29 @@
 <script lang="ts" setup>
-import { facultyList } from '~/types/Faculty'
+const test1 = (value) => {
+    alert(value)
+}
 
-const facultySelection = ref('')
+const test2 = (value) => {
+    alert(value)
+}
 </script>
 
 <template>
     <div class="flex flex-col gap-4">
         <AtomsHeading class="text-center w-full" title="Tương thích giữa môn học và chuẩn đầu ra (CLO)" />
 
+        <MoleculesDropdownKhoaNganhCNDT @changeKhoa="test1" @changeNganh="test2" />
+
         <el-card shadow="never">
-            <div class="section__selection">
+            <div class="flex flex-col gap-4">
+                <AtomsDropdownMaMon @changeMaMon="test1" />
+                <AtomsDropdownNamKhaoSat @changeNamKhaoSat="test1" />
+                <AtomsDropdownCLO @changeCLO="test1" />
 
-                <div class="section__selection__item">
-                    <span class="section__selection__label">Khoa</span>
-                    <el-select v-model="facultySelection" placeholder="Chọn khoa">
-                        <el-option v-for="(item, index) in facultyList" :key="index" :label="item.name"
-                            :value="item.name" />
-                    </el-select>
-                </div>
-
-
-                <div class="section__selection__item">
-                    <span class="section__selection__label">Ngành</span>
-                    <el-select v-model="facultySelection" placeholder="Chọn khoa">
-                        <el-option v-for="(item, index) in facultyList" :key="index" :label="item.name"
-                            :value="item.name" />
-                    </el-select>
-                </div>
-
-
-                <div class="section__selection__item">
-                    <span class="section__selection__label">Chương trình đào tạo</span>
-                    <el-select v-model="facultySelection" placeholder="Chọn khoa">
-                        <el-option v-for="(item, index) in facultyList" :key="index" :label="item.name"
-                            :value="item.name" />
-                    </el-select>
-                </div>
+                <AtomsInputDiemCanDat />
             </div>
         </el-card>
 
-
         <LazyMoleculesTableMonHocVaChuanDauRa />
-
     </div>
 </template>
-
-<style lang="scss" scoped></style>

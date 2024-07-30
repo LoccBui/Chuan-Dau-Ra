@@ -27,7 +27,7 @@ const handleClose = (key: string, keyPath: string[]) => {
 
 <template>
     <div>
-        <el-menu :collapse="isCollapse" @open="handleOpen" @close="handleClose">
+        <el-menu class="h-screen" :collapse="isCollapse" @open="handleOpen" @close="handleClose">
 
 
             <el-menu-item class="!sticky top-0 z-20 shadow bg-white" index="0" @click="isCollapse = !isCollapse">

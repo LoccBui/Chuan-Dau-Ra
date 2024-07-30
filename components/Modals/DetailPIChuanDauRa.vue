@@ -37,7 +37,6 @@ const checkModify = () => {
 <template>
     <el-dialog v-model="centerDialogVisible" title="Sửa" width="500" align-center @open="initializeData"
         @close="handleClose">
-        <span>{{ props.data }}</span>
         <div class="flex flex-col gap-4">
             <el-input v-model="inputDate">
                 <template #prepend>PLO</template>

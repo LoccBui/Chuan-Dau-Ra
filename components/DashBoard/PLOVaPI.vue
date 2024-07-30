@@ -7,8 +7,8 @@ const test1 = (value) => {
     alert(value)
 }
 
-const test2 = () => {
-    alert(123)
+const test2 = (value) => {
+    alert(value)
 }
 </script>
 

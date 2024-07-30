@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import { sampleData } from '~/types/SampleData'
 
+const modalState = ref<boolean>(false)
+const modalDelete = ref<boolean>(false)
+
 const handleClick = () => {
     console.log('handleClick')
 }
@@ -12,10 +15,12 @@ const handleAddFaculty = () => {
 
 <template>
     <el-card shadow="never">
-        <el-button type="primary" @click="handleAddFaculty">
-            Thêm
-        </el-button>
 
+        <div class="flex justify-end">
+            <el-button type="primary" @click="handleAddFaculty">
+                Thêm
+            </el-button>
+        </div>
 
         <el-table :data="sampleData">
             <el-table-column prop="date" label="Mã môn" />
@@ -33,4 +38,8 @@ const handleAddFaculty = () => {
             </el-table-column>
         </el-table>
     </el-card>
+
+
+    <!-- <LazyModalsDetailPIChuanDauRa :data="selectionPLO" :isOpenModal="modalState" @closeModal="modalState = false" />
+    <LazyModalsDeteleAction :isOpenModal="modalDelete" @closeModal="modalDelete = false" /> -->
 </template>
