@@ -1,6 +1,15 @@
 <script lang="ts" setup>
 import { facultyList } from '~/types/Faculty'
 
+export interface Props {
+    hasMonHoc: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    hasMonHoc: false
+})
+
+
 const khoaSelection = ref('')
 const nganhSelection = ref('')
 const ctdtSelection = ref('')
@@ -46,6 +55,8 @@ const changeCTDT = () => {
                         :value="item.name" />
                 </el-select>
             </div>
+
+            <LazyAtomsDropdownMonHoc v-if="hasMonHoc" />
         </div>
     </el-card>
 </template>

@@ -48,28 +48,29 @@ const handleClose = (key: string, keyPath: string[]) => {
             </el-menu-item>
 
 
-            <el-menu-item index="2" @click="moveTo('mon-hoc-va-clo')">
+            <el-menu-item :class="{ 'is-active': isCorrectRoute('mon-hoc-va-clo') }" @click="moveTo('mon-hoc-va-clo')">
                 <el-icon>
                     <document />
                 </el-icon>
                 <template #title>Môn học và CLO</template>
             </el-menu-item>
 
-            <el-menu-item index="3" @click="moveTo('nhap-map')">
+            <el-menu-item :class="{ 'is-active': isCorrectRoute('nhap-map') }" @click="moveTo('nhap-map')">
                 <el-icon>
                     <setting />
                 </el-icon>
                 <template #title>Nhập map</template>
             </el-menu-item>
 
-            <el-menu-item index="4" @click="moveTo('de-cuong-chi-tiet')">
+            <el-menu-item :class="{ 'is-active': isCorrectRoute('de-cuong-chi-tiet') }"
+                @click="moveTo('de-cuong-chi-tiet')">
                 <el-icon>
                     <setting />
                 </el-icon>
                 <template #title>Đề cương chi tiết</template>
             </el-menu-item>
 
-            <el-menu-item index="5" :class="{ 'is-active': isCorrectRoute('cham-diem') }" @click="moveTo('cham-diem')">
+            <el-menu-item :class="{ 'is-active': isCorrectRoute('cham-diem') }" @click="moveTo('cham-diem')">
                 <el-icon>
                     <setting />
                 </el-icon>
@@ -92,7 +93,7 @@ const handleClose = (key: string, keyPath: string[]) => {
                 <template #title>Kết quả đánh giá chương trình đào tạo</template>
             </el-menu-item>
 
-            <el-menu-item @click="moveTo('de-cuong-chi-tiet')">
+            <el-menu-item @click="moveTo('tai-khoan')">
                 <el-icon>
                     <setting />
                 </el-icon>
@@ -149,6 +150,10 @@ const handleClose = (key: string, keyPath: string[]) => {
 
 .el-menu-item {
     @apply leading-5 whitespace-normal #{!important};
+}
+
+.is-active {
+    @apply bg-primary/5;
 }
 
 .icon,

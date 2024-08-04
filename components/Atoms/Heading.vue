@@ -13,6 +13,6 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-    <h1 v-if="type === 'heading'" :class="class" class="text-primary"> {{ title }}</h1>
+    <h1 v-if="type === 'heading'" :class="class" class="heading-primary"> {{ title }}</h1>
     <h2 v-if="type === 'sub'" :class="class" class="sub-primary"> {{ title }}</h2>
 </template>

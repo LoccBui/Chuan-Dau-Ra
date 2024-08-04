@@ -8,7 +8,6 @@
 // Define global variables
 :root {
   --main-border: 10px;
-  --primary-color: #007bff;
 }
 
 html,
@@ -23,11 +22,7 @@ body,
 form {
   $self: &;
   &__title {
-    @apply text-black text-center text-xl font-semibold;
-  }
-
-  .el-form-item__label {
-    @apply text-black;
+    @apply text-center text-xl font-semibold;
   }
 }
 
@@ -35,10 +30,10 @@ form {
   @apply rounded-lg #{!important};
 }
 
-.text-primary {
-  @apply text-[--primary-color] uppercase text-2xl font-bold;
+.heading-primary {
+  @apply text-primary uppercase text-2xl font-bold;
 }
 
 .sub-primary {
-  @apply text-[--primary-color] uppercase text-lg font-bold mb-5;
+  @apply text-primary uppercase text-lg font-bold mb-5;
 }

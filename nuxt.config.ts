@@ -22,6 +22,13 @@ export default defineNuxtConfig({
       apiBase: process.env.BASE_URL,
     },
   },
+  postcss: {
+    // @see: https://tailwindcss.com/docs/guides/nuxtjs
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
   pinia: {
     storesDirs: ["./stores/**", "./custom-folder/stores/**"],
   },

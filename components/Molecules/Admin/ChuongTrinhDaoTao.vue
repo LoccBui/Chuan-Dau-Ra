@@ -19,7 +19,7 @@ const handleAddYear = () => {
 
 <template>
     <div class="flex flex-col gap-4 w-full">
-        <h1 class="w-full text-primary text-center">Nhập danh sách chương trình đào tạo</h1>
+        <h1 class="w-full heading-primary text-center">Nhập danh sách chương trình đào tạo</h1>
 
         <el-card shadow="never">
             <div class="flex items-center gap-4">

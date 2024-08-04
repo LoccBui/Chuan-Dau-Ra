@@ -20,7 +20,7 @@ const handleDelete = () => {
 
 <template>
     <div class="flex flex-col gap-4 w-full">
-        <h1 class="w-full text-primary text-center">Nhập danh sách sinh viên</h1>
+        <h1 class="w-full heading-primary text-center">Nhập danh sách sinh viên</h1>
 
         <div>
             <el-button type="primary" @click="handleAdd">Thêm sinh viên</el-button>

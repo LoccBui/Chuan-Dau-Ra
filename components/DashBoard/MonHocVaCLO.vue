@@ -19,8 +19,12 @@ const test2 = (value) => {
                 <AtomsDropdownMaMon @changeMaMon="test1" />
                 <AtomsDropdownNamKhaoSat @changeNamKhaoSat="test1" />
                 <AtomsDropdownCLO @changeCLO="test1" />
-
                 <AtomsInputDiemCanDat />
+
+                <LayoutButton>
+                    <el-button type="primary">Thêm</el-button>
+                    <el-button>Sửa</el-button>
+                </LayoutButton>
             </div>
         </el-card>
 

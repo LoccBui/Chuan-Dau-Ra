@@ -15,7 +15,9 @@ const handleAddFaculty = () => {
 
         <AtomsHeading class="text-center !capitalize" type="sub" title="Mapping giữa môn học và chuẩn đầu ra" />
 
-        <el-button type="primary"> In báo cáo </el-button>
+        <LayoutButton>
+            <el-button type="primary"> In báo cáo </el-button>
+        </LayoutButton>
 
         <el-table :data="sampleData">
             <el-table-column prop="date" label="Mã môn" />

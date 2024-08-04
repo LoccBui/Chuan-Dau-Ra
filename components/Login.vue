@@ -39,7 +39,7 @@ const submitForm = async () => {
 
 <template>
     <div class="min-w-96 w-full h-full flex flex-col items-center justify-center px-4 gap-4 text-center">
-        <div class="text-primary">Chuẩn đầu ra</div>
+        <div class="heading-primary">Chuẩn đầu ra</div>
 
         <div class="tracking-widest">Dẫn đầu công nghệ</div>
 
