@@ -10,9 +10,12 @@ const handleClick = () => {
     <el-card shadow="never">
         <AtomsHeading class="text-center" type="sub" title="Chi tiết đánh giá chuẩn môn học" />
 
-        <el-button type="primary">
-            In báo cáo
-        </el-button>
+        <LayoutButton>
+            <el-button type="primary">
+                In báo cáo
+            </el-button>
+        </LayoutButton>
+
 
         <el-table :data="sampleData">
             <el-table-column prop="date" label="PLO" />

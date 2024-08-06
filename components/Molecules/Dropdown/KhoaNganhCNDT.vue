@@ -1,12 +1,16 @@
 <script lang="ts" setup>
 import { facultyList } from '~/types/Faculty'
 
-export interface Props {
-    hasMonHoc: boolean
+interface Props {
+    hasMonHoc?: boolean
+    hasNamKhaoSat?: boolean
+    hasBorder?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    hasMonHoc: false
+    hasMonHoc: false,
+    hasNamKhaoSat: false,
+    hasBorder: true,
 })
 
 
@@ -27,10 +31,15 @@ const changeNganh = () => {
 const changeCTDT = () => {
     emit('changeCTDT', ctdtSelection.value)
 }
+
+const dynamicCssClasses = computed(() => ({
+    '!border-0': !props.hasBorder,
+    '': props.hasBorder,
+}))
 </script>
 
 <template>
-    <el-card shadow="never">
+    <el-card :class="dynamicCssClasses" shadow="never">
         <div class="flex flex-col gap-4">
             <div class="flex items-center gap-10">
                 <span class="min-w-60">Khoa</span>
@@ -57,6 +66,7 @@ const changeCTDT = () => {
             </div>
 
             <LazyAtomsDropdownMonHoc v-if="hasMonHoc" />
+            <LazyAtomsDropdownNamKhaoSat v-if="hasNamKhaoSat" />
         </div>
     </el-card>
 </template>
