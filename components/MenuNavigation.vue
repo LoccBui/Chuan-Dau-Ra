@@ -133,7 +133,7 @@ const handleClose = (key: string, keyPath: string[]) => {
             </el-menu>
 
             <!-- Log out -->
-            <el-menu-item class="!sticky !bottom-0 w-full border-t-[1px] border-slate-500/80" @click="auth.logOut()">
+            <el-menu-item class="!sticky !bottom-0 w-full !border-t-[.5px] hover:!bg-red-500/5" @click="auth.logOut()">
                 <Icon name="ion:log-out" />
                 <template #title>Đăng xuất</template>
             </el-menu-item>
@@ -147,11 +147,11 @@ const handleClose = (key: string, keyPath: string[]) => {
 }
 
 .el-menu-item {
-    @apply leading-5 whitespace-normal bg-[white] #{!important};
+    @apply leading-5 whitespace-normal #{!important};
 }
 
 .is-active {
-    @apply bg-primary/5;
+    @apply bg-primary/5 #{!important};
 }
 
 .icon,

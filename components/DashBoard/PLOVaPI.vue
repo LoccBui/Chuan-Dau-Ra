@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-import { facultyList } from '~/types/Faculty';
-
-const facultySelection = ref('')
 
 const test1 = (value) => {
     alert(value)
@@ -14,6 +11,7 @@ const test2 = (value) => {
 
 <template>
     <div class="flex flex-col gap-4">
+        <span class="text-red-500">123</span>
         <AtomsHeading class="text-center w-full"
             title="Nhập dữ liệu chuẩn đầu ra chương trình (PLO) và chuẩn đầu ra trung gian (PI)" />
 

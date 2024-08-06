@@ -1,3 +1,5 @@
+const colors = require("tailwindcss/colors")
+
 module.exports = {
   content: [
     "./components/**/*.{js,vue,ts}",
@@ -14,7 +16,10 @@ module.exports = {
   ],
   theme: {
     colors: {
+      ...colors,
       primary: "#409EFF",
     },
+    extend: {},
   },
+  plugins: [],
 }

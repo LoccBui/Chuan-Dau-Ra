@@ -1,9 +1,9 @@
-@import "/assets/ui/scrollbar.scss";
-
 // Get all tailwind css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import "/assets/ui/scrollbar.scss";
 
 // Define global variables
 :root {

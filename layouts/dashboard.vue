@@ -7,6 +7,5 @@
         <el-main class="p-2 max-w-screen-xl w-full mx-auto min-h-full my-auto">
             <NuxtPage />
         </el-main>
-
     </el-container>
 </template>
