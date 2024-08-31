@@ -39,16 +39,36 @@ export const useAuthStore = defineStore({
         return isLoading
       } catch (error) {
         console.error(error)
-        useGuiStore().showToast(
-          "Đăng nhập thất bại, vui lòng thử lại sau",
-          "error"
-        )
+        useShowToast("Đăng nhập thất bại, vui lòng thử lại sau", "error")
+      }
+    },
+
+    async register(username: string, password: string) {
+      try {
+        const domain = useDomain()
+        const isLoading = ref(false)
+        const res = await $fetch(domain.apiBase + "/register", {
+          method: "POST",
+          body: {
+            username,
+            password,
+          },
+        })
+
+        if (res) {
+          this.isLoggedIn = true
+          isLoading.value = true
+        }
+
+        return isLoading
+      } catch (error) {
+        console.error(error)
+        useShowToast("Đăng ký thất bại, vui lòng thử lại sau", "error")
       }
     },
 
     logOut() {
       this.isLoggedIn = false
-
       navigateTo("/")
     },
   },

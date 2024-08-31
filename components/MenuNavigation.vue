@@ -29,7 +29,7 @@ const handleClose = (key: string, keyPath: string[]) => {
     <div>
         <el-menu class="h-screen" :collapse="isCollapse" @open="handleOpen" @close="handleClose">
 
-            <el-menu-item class="!sticky top-0 z-20 shadow bg-white" index="0" @click="isCollapse = !isCollapse">
+            <el-menu-item class="!sticky top-0 z-20 shadow !bg-white" @click="isCollapse = !isCollapse">
                 <div>
                     <Icon v-if="isCollapse" name="majesticons:menu-expand-right-line" />
                     <Icon v-if="!isCollapse" name="majesticons:menu-expand-left-line" />
@@ -147,7 +147,7 @@ const handleClose = (key: string, keyPath: string[]) => {
 }
 
 .el-menu-item {
-    @apply leading-5 whitespace-normal #{!important};
+    @apply leading-5 bg-white whitespace-normal #{!important};
 }
 
 .is-active {

@@ -1,25 +1,28 @@
 <script lang="ts" setup>
-import { facultyList } from '~/types/Faculty';
-
-const facultySelection = ref('')
-
-const test1 = (value) => {
+const test1 = (value: string) => {
     alert(value)
 }
 
-const test2 = (value) => {
-    alert(value)
+const lookDetailDeCuong = () => {
+    console.log('Detail de cuong');
 }
 </script>
 
 <template>
-    <div class="flex flex-col gap-4">
+    <LayoutContainer>
+
         <AtomsHeading class="text-center w-full" title="Đề cương chi tiết" />
 
-        <MoleculesDropdownKhoaNganhCNDT hasMonHoc @changeKhoa="test1" @changeNganh="test2" />
+        <LayoutCard>
+            <AtomsDropdownKhoa @changeKhoa="test1" />
+            <AtomsDropdownNganh @changeNganh="test1" />
+            <AtomsDropdownChuongTrinhDT @changeCTDT="test1" />
+            <AtomsDropdownMonHoc @changeMonHoc="test1" />
+        </LayoutCard>
+
 
         <LayoutButton>
-            <el-button type="primary"> Xem đề cương chi tiết</el-button>
+            <el-button type="primary" @click="lookDetailDeCuong"> Xem đề cương chi tiết</el-button>
         </LayoutButton>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -29,6 +32,7 @@ const test2 = (value) => {
             <MoleculesTableDanhGiaMonHoc />
         </div>
 
-        <LazyMoleculesTableNoiDungVaKeHoachGiangDay />
-    </div>
+        <MoleculesTableNoiDungVaKeHoachGiangDay />
+
+    </LayoutContainer>
 </template>

@@ -41,6 +41,7 @@ const dynamicCssClasses = computed(() => ({
 <template>
     <el-card :class="dynamicCssClasses" shadow="never">
         <div class="flex flex-col gap-4">
+            
             <div class="flex items-center gap-10">
                 <span class="min-w-60">Khoa</span>
                 <el-select v-model="khoaSelection" placeholder="Chọn khoa" @change="changeKhoa">

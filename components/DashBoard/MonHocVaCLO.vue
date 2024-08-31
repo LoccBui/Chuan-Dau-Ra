@@ -1,33 +1,35 @@
 <script lang="ts" setup>
-const test1 = (value) => {
-    alert(value)
+const test1 = (value: string) => {
+    console.log(value);
 }
 
-const test2 = (value) => {
-    alert(value)
+const input = (value: string) => {
+    console.log(value);
 }
 </script>
 
 <template>
-    <div class="flex flex-col gap-4">
+    <LayoutContainer>
         <AtomsHeading class="text-center w-full" title="Tương thích giữa môn học và chuẩn đầu ra (CLO)" />
 
-        <MoleculesDropdownKhoaNganhCNDT @changeKhoa="test1" @changeNganh="test2" />
+        <LayoutCard>
+            <AtomsDropdownKhoa @changeKhoa="test1" />
+            <AtomsDropdownNganh @changeNganh="test1" />
+            <AtomsDropdownChuongTrinhDT @changeCTDT="test1" />
+        </LayoutCard>
 
-        <el-card shadow="never">
-            <div class="flex flex-col gap-4">
-                <AtomsDropdownMaMon @changeMaMon="test1" />
-                <AtomsDropdownNamKhaoSat @changeNamKhaoSat="test1" />
-                <AtomsDropdownCLO @changeCLO="test1" />
-                <AtomsInputDiemCanDat />
+        <LayoutCard>
+            <AtomsDropdownMaMon @changeMaMon="test1" />
+            <AtomsDropdownNamKhaoSat @changeNamKhaoSat="test1" />
+            <AtomsDropdownCLO @changeCLO="test1" />
+            <AtomsInputDiemCanDat @changeInput="input" />
 
-                <LayoutButton>
-                    <el-button type="primary">Thêm</el-button>
-                    <el-button>Sửa</el-button>
-                </LayoutButton>
-            </div>
-        </el-card>
+            <LayoutButton>
+                <el-button type="primary">Thêm</el-button>
+                <el-button>Sửa</el-button>
+            </LayoutButton>
+        </LayoutCard>
 
-        <LazyMoleculesTableMonHocVaChuanDauRa />
-    </div>
+        <MoleculesTableMonHocVaChuanDauRa />
+    </LayoutContainer>
 </template>

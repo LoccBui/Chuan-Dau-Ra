@@ -1,20 +1,26 @@
 <script lang="ts" setup>
 const test1 = () => {
-    alert('test1')
+    console.log('test');
 }
 </script>
 
 <template>
-    <div class="flex flex-col gap-4">
+    <LayoutContainer>
+
         <AtomsHeading class="text-center w-full" title="Ánh xạ chuẩn đầu ra môn học với chuẩn đầu ra chương trình" />
 
-        <MoleculesDropdownKhoaNganhCNDT @changeKhoa="test1" @changeNganh="test2" />
-        <AtomsDropdownNamKhaoSat @changeNamKhaoSat="test1" />
+        <LayoutCard>
+            <AtomsDropdownKhoa @changeKhoa="test1" />
+            <AtomsDropdownNganh @changeNganh="test1" />
+            <AtomsDropdownChuongTrinhDT @changeCTDT="test1" />
+            <AtomsDropdownNamKhaoSat @changeNamKhaoSat="test1" />
+        </LayoutCard>
 
         <!-- Ma Tran De Thi -->
-        <LazyMoleculesTableMaTranDeThi />
+        <MoleculesTableMaTranDeThi />
 
         <!-- Mapping -->
-        <LazyMoleculesTableMappingMonHocVaCDR />
-    </div>
+        <MoleculesTableMappingMonHocVaCDR />
+
+    </LayoutContainer>
 </template>

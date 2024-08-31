@@ -23,7 +23,7 @@ const handleRowSelection = (clickedValue: never) => {
 </script>
 
 <template>
-    <el-card shadow="never">
+    <LayoutCard>
         <AtomsHeading class="text-center" type="sub" title="Chuẩn đầu ra chương trình (PLO)" />
 
         <el-table @row-click="handleRowSelection" :data="sampleData" class="cursor-pointer">
@@ -38,7 +38,7 @@ const handleRowSelection = (clickedValue: never) => {
                 </template>
             </el-table-column>
         </el-table>
-    </el-card>
+    </LayoutCard>
 
     <LazyModalsDetailPIChuanDauRa :data="selectionPLO" :isOpenModal="modalState" @closeModal="modalState = false" />
     <LazyModalsDeteleAction :isOpenModal="modalDelete" @closeModal="modalDelete = false" />
