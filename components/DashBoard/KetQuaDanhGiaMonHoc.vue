@@ -1,14 +1,21 @@
 <script lang="ts" setup></script>
 
 <template>
-    <div class="flex flex-col gap-4">
+    <LayoutContainer>
+
         <AtomsHeading class="text-center w-full" title="Đánh giá chuẩn đầu ra môn học" />
 
-        <MoleculesDropdownKhoaNganhCNDT hasMonHoc hasNamKhaoSat @changeKhoa="test1" @changeNganh="test2" />
+        <LayoutCard>
+            <AtomsDropdownKhoa @changeKhoa="test1" />
+            <AtomsDropdownNganh @changeNganh="test1" />
+            <AtomsDropdownChuongTrinhDT @changeCTDT="test1" />
+            <AtomsDropdownMonHoc @changeMonHoc="test1" />
+            <AtomsDropdownNamKhaoSat @changeNamKhaoSat="test1" />
+        </LayoutCard>
 
         <div class="grid grid-cols-2 gap-4">
-            <LazyMoleculesTableDanhSachChuanDauRa />
-            <LazyMoleculesTableChiTietChuanRaMonHoc />
+            <MoleculesTableDanhSachChuanDauRa />
+            <MoleculesTableChiTietChuanRaMonHoc />
         </div>
 
         <div class="grid grid-cols-2 gap-4">
@@ -16,7 +23,8 @@
             <LazyMoleculesChartDanhGiaChuanDauRaMonHoc />
         </div>
 
-        <el-card shadow="never">
+        <LayoutCard>
+
             <AtomsHeading class="text-center" type="sub" title="Kết quả PLO" />
 
             <div class="flex flex-col gap-1">
@@ -34,6 +42,7 @@
                 <el-input value="Readonly" readonly></el-input>
             </div>
 
-        </el-card>
-    </div>
+        </LayoutCard>
+
+    </LayoutContainer>
 </template>

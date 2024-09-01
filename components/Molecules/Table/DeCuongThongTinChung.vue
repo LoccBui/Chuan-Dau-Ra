@@ -42,7 +42,7 @@ const setPage = (page: number) => {
         <AtomsHeading class="text-center" type="sub" title="Thông tin chung" />
 
         <LayoutButton>
-            <AtomsButtonAdd @addClicked="handleClick" />
+            <el-button type="primary"> Thêm </el-button>
         </LayoutButton>
 
 

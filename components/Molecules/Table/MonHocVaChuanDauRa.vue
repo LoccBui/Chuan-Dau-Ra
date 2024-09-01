@@ -41,7 +41,7 @@ const setPage = (page: number) => {
     <LayoutCard>
 
         <LayoutButton>
-            <AtomsButtonAdd @addClicked="handleAddFaculty" />
+            <el-button type="primary"> Thêm </el-button>
         </LayoutButton>
 
         <el-table v-loading="pending" :data="paginatedData" empty-text="Không có dữ liệu">

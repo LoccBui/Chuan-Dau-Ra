@@ -30,7 +30,7 @@ const setPage = (page: number) => {
         <AtomsHeading class="text-center" type="sub" title="Mapping chuẩn đầu ra học phần và bài học" />
 
         <LayoutButton>
-            <AtomsButtonAdd @addClicked="handleClick" />
+            <el-button type="primary"> Thêm </el-button>
         </LayoutButton>
 
 
