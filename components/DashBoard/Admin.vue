@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { TabsPaneContext } from 'element-plus'
 
-const activeName = ref('first')
+const activeName = ref<string>('first')
 
 const handleClick = (tab: TabsPaneContext, event: Event) => {
     console.log(tab, event)

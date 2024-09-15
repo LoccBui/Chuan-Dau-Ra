@@ -1,20 +1,26 @@
 <script lang="ts" setup>
-import { facultyList } from '~/types/Faculty'
-
 const selection = ref('')
-
+const fetchStore = useFetchStore()
 const emit = defineEmits(['changeKhoa'])
 
+const { data: listFaculties, pending } = await fetchStore.fetchKhoa()
+
 const changeSelection = () => {
-    emit('changeKhoa', selection.value)
+    fetchStore.khoaSelection = selection.value
 }
 </script>
 
 <template>
     <div class="flex items-center gap-10">
         <span class="min-w-60">Khoa</span>
-        <el-select v-model="selection" placeholder="Chọn khoa" @change="changeSelection">
-            <el-option v-for="(item, index) in facultyList" :key="index" :label="item.name" :value="item.name" />
+        
+        <el-select :loading="pending" v-model="selection" placeholder="Chọn khoa" @change="changeSelection">
+            <el-option 
+                v-for="item in listFaculties" 
+                :key="item.id" 
+                :label="item.name" 
+                :value="item.id" 
+            />
         </el-select>
     </div>
 </template>

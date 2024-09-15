@@ -1,4 +1,8 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const test1 = () => {
+    console.log('test1');
+}
+</script>
 
 <template>
     <LayoutContainer>

@@ -21,6 +21,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiBase: process.env.BASE_URL,
+      apiUri: process.env.API_URL
     },
   },
   postcss: {

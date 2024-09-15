@@ -2,8 +2,12 @@
 import { facultyList } from '~/types/Faculty'
 
 const selection = ref('')
+const fetchStore = useFetchStore()
 
 const emit = defineEmits(['changeCTDT'])
+
+const { data: listFaculties, pending } = await fetchStore.fetchCTDT()
+
 
 const changeSelection = () => {
     emit('changeCTDT', selection.value)

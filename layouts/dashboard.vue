@@ -1,3 +1,12 @@
+<script lang="ts" setup>
+onBeforeMount(() => {
+    if (!useAuthStore().token) {
+        navigateTo('/')
+        useShowToast("Vui lòng đăng nhập", "error")
+    }
+})
+</script>
+
 <template>
     <el-container>
         <el-aside class="!w-auto max-w-48 sticky left-0 top-0 h-screen overflow-y-auto !overflow-x-hidden">

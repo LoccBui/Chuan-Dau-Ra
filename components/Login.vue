@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import _ from 'lodash'
+
 const auth = useAuthStore()
 
 const ruleFormRef = ref()
@@ -20,28 +22,28 @@ const rules = reactive({
     ],
 })
 
-const submitForm = async () => {
+const submitForm = useDebounce(async () => {
     if (!ruleFormRef.value) return
     await ruleFormRef.value.validate(async (valid: boolean) => {
         if (valid) {
             isLoading.value = true
-            const res = await auth.login(form.username, form.password)
-
-            if (res) {
+            const { data } = await auth.login(form.username, form.password)
+            
+            if (!_.isEmpty(data.value)) {
                 navigateTo("/dashboard/plo-va-pi")
             }
 
             isLoading.value = false
         }
     })
-}
+})
 </script>
 
 <template>
     <div class="min-w-96 w-full h-full flex flex-col items-center justify-center px-4 gap-3 text-center">
         <div class="heading-primary">Chuẩn đầu ra</div>
 
-        <div class="tracking-widest">Dẫn đầu công nghệ</div>
+        <div class="tracking-widest">Thay đổi để tạo ra sự khác biệt</div>
 
         <el-divider class="!m-0" />
 

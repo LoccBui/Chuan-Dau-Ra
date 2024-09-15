@@ -7,7 +7,6 @@
 <script lang="ts" setup>
 const appConfig = useAppConfig()
 
-
 useHead({
   title: appConfig.title
 })
