@@ -17,7 +17,6 @@ const confirm = () => {
 }
 
 const closeModal = () => {
-    centerDialogVisible.value = false
     emit('closeModal')
 }
 </script>

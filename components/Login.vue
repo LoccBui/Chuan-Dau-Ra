@@ -2,7 +2,6 @@
 import _ from 'lodash'
 
 const auth = useAuthStore()
-
 const ruleFormRef = ref()
 const isLoading = ref(false)
 
@@ -14,7 +13,7 @@ const form = reactive({
 const rules = reactive({
     username: [
         { required: true, message: 'Vui lòng nhập tài khoản', trigger: 'blur' },
-        { min: 3, max: 10, message: 'Tài khoản nên từ 3 - 10 kí tự', trigger: 'blur' },
+        { min: 3, max: 20, message: 'Tài khoản nên từ 3 - 20 kí tự', trigger: 'blur' },
     ],
     password: [
         { required: true, message: 'Vui lòng nhập mật khẩu', trigger: 'blur' },
@@ -26,14 +25,8 @@ const submitForm = useDebounce(async () => {
     if (!ruleFormRef.value) return
     await ruleFormRef.value.validate(async (valid: boolean) => {
         if (valid) {
-            isLoading.value = true
-            const { data } = await auth.login(form.username, form.password)
-            
-            if (!_.isEmpty(data.value)) {
-                navigateTo("/dashboard/plo-va-pi")
-            }
-
-            isLoading.value = false
+            const { pending } = await auth.login(form.username, form.password)
+            isLoading.value = pending.value
         }
     })
 })
@@ -41,8 +34,8 @@ const submitForm = useDebounce(async () => {
 
 <template>
     <div class="min-w-96 w-full h-full flex flex-col items-center justify-center px-4 gap-3 text-center">
-        <div class="heading-primary">Chuẩn đầu ra</div>
 
+        <div class="heading-primary">Chuẩn đầu ra</div>
         <div class="tracking-widest">Thay đổi để tạo ra sự khác biệt</div>
 
         <el-divider class="!m-0" />

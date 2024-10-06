@@ -13,14 +13,9 @@ const changeSelection = () => {
 <template>
     <div class="flex items-center gap-10">
         <span class="min-w-60">Khoa</span>
-        
+
         <el-select :loading="pending" v-model="selection" placeholder="Chọn khoa" @change="changeSelection">
-            <el-option 
-                v-for="item in listFaculties" 
-                :key="item.id" 
-                :label="item.name" 
-                :value="item.id" 
-            />
+            <el-option v-for="item in listFaculties" :key="item.id" :label="item.name" :value="item.id" />
         </el-select>
     </div>
 </template>

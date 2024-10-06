@@ -1,8 +1,23 @@
 <script lang="ts" setup>
-const fetchStore = useFetchStore()
+const selectionCTDTId = ref(0)
+const selectionPLO = ref([])
+const fetch = useFetchStore()
 
-const changeKHoa = (id: number) => {
-    fetchStore.khoaSelection = id
+const changeCTDT = (selectionId: number) => {
+    selectionCTDTId.value = selectionId
+
+    console.log('CTDT id: ', selectionId);
+
+    selectionPLO.value = [] // reset PI table
+}
+
+const changePLOSelection = (selectionValue) => {
+    selectionPLO.value = selectionValue
+}
+
+const reloadPLO = async (ploID) => {
+    const { data } = await fetch.getPIByPLOId(ploID) // reload PLO to update the pis
+    selectionPLO.value = [data]
 }
 </script>
 
@@ -12,14 +27,14 @@ const changeKHoa = (id: number) => {
             title="Nhập dữ liệu chuẩn đầu ra chương trình (PLO) và chuẩn đầu ra trung gian (PI)" />
 
         <LayoutCard>
-            <AtomsDropdownKhoa @changeKhoa="changeKHoa" />
-            <AtomsDropdownNganh @changeNganh="changeKHoa" />
-            <AtomsDropdownChuongTrinhDT @changeCTDT="changeKHoa" />
+            <AtomsDropdownKhoa />
+            <AtomsDropdownNganh />
+            <AtomsDropdownChuongTrinhDT @changeCTDT="changeCTDT" />
         </LayoutCard>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-            <MoleculesTablePLOChuanDauRa />
-            <MoleculesTablePIChuanDauRa />
+            <MoleculesTablePLOChuanDauRa :idCTDT="selectionCTDTId" @changePLOSelection="changePLOSelection" />
+            <MoleculesTablePIChuanDauRa :items="selectionPLO" @reloadPLO="reloadPLO" />
         </div>
 
     </LayoutContainer>

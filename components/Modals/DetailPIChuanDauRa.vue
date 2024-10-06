@@ -18,15 +18,19 @@ const handleConfirm = () => {
     centerDialogVisible.value = false
 }
 
-const inputDate = ref('')
+const inputCLO = ref('')
+const inputDescription = ref('')
+
 
 const initializeData = () => {
-    inputDate.value = props.data.date
+    console.log('open');
+    inputCLO.value = props.data.code
+    inputDescription.value = props.data.description
 }
 
 
 const checkModify = () => {
-    if (inputDate.value !== props.data.date) {
+    if (inputDescription.value !== props.data.date) {
         alert('data changes so send requests to the server')
     } else {
         alert('data not changes')
@@ -35,13 +39,13 @@ const checkModify = () => {
 </script>
 
 <template>
-    <el-dialog v-model="centerDialogVisible" title="Sửa" width="500" align-center @open="initializeData"
-        @close="handleClose">
+    <el-dialog v-model="centerDialogVisible" title="Sửa" align-center @open="initializeData" @close="handleClose">
+
         <div class="flex flex-col gap-4">
-            <el-input v-model="inputDate">
+            <el-input v-model="inputCLO" readonly>
                 <template #prepend>PLO</template>
             </el-input>
-            <el-input v-model="inputDate">
+            <el-input v-model="inputDescription">
                 <template #prepend>Nội dung PLO</template>
             </el-input>
         </div>

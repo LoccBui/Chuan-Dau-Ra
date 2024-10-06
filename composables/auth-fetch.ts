@@ -1,7 +1,10 @@
-import { UseFetchOptions } from 'nuxt/app'
-import { useAuthStore } from '~/stores/auth.store'
+import { UseFetchOptions } from "nuxt/app"
+import { useAuthStore } from "~/stores/auth.store"
 
-export const useAuthFetch = (url: string, options: UseFetchOptions<any> = {}) => {
+export const useAuthFetch = (
+  url: string,
+  options: UseFetchOptions<any> = {}
+) => {
   const authStore = useAuthStore()
 
   const defaults: UseFetchOptions<any> = {
@@ -11,6 +14,17 @@ export const useAuthFetch = (url: string, options: UseFetchOptions<any> = {}) =>
     headers: {
       ...options.headers,
       Authorization: `Bearer ${authStore.token}`,
+    },
+    onResponse: async function ({ response }) {
+      // Handle the 401 error status code
+      if (response.status === 401) {
+        await authStore.refreshToken()
+      }
+
+      // Call any custom onResponse function provided in options
+      if (options.onResponse) {
+        options.onResponse({ response })
+      }
     },
   }
 
