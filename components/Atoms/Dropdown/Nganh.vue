@@ -5,15 +5,10 @@ const selection = ref('')
 const fetchStore = useFetchStore()
 const emit = defineEmits(['changeNganh'])
 
-const listItems = ref('')
-
 watch(
     () => fetchStore.khoaSelection,
     () => {
-        selection.value = '' // reset
         selection.value = fetchStore.faculties[0]
-        console.log(selection.value);
-        console.log('list fetchStore.faculties', fetchStore.faculties);
         changeSelection()
     }
 )

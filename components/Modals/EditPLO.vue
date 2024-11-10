@@ -3,7 +3,8 @@ import _ from 'lodash'
 
 const props = defineProps<{
     isOpenModal: boolean
-    data: any
+    data: any,
+    idCTDT: number
 }>()
 
 const fetchStore = useFetchStore()
@@ -41,7 +42,7 @@ const handleConfirm = useDebounce(async () => {
     if (!ruleFormRef.value) return
     await ruleFormRef.value.validate(async (valid: boolean) => {
         if (valid) {
-            const { data } = await fetchStore.editPLO(form.idPLO, form.ploCode, form.descriptions, fetchStore.ctdtSelection)
+            const { data } = await fetchStore.editPLO(form.idPLO, form.ploCode, form.descriptions, props.idCTDT)
 
             if (data.value) {
                 ruleFormRef.value.resetFields()

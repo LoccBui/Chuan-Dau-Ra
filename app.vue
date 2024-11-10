@@ -8,9 +8,12 @@
 const appConfig = useAppConfig()
 
 const fetch = useFetchStore()
+const auth = useAuthStore()
 
 
-fetch.fetchResources()
+if (auth.token) {
+  fetch.fetchResources()
+}
 
 useHead({
   title: appConfig.title

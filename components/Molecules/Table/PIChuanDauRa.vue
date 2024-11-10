@@ -2,7 +2,8 @@
 import _ from 'lodash'
 
 export interface Props {
-    items: Array<Props>
+    items: Array<Props>,
+    idCTDT: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -19,17 +20,30 @@ const selectionPI = ref(null)
 const emit = defineEmits(['reloadPLO'])
 
 const handleAdd = () => {
-    modalAdd.value = !modalAdd.value
+    if (isHasCTDT()) modalAdd.value = !modalAdd.value
 }
 
 const handleEdit = (data: any) => {
-    modalState.value = !modalState.value
-    selectionPI.value = data // data for edit selection
+    if (isHasCTDT()) {
+        modalState.value = !modalState.value
+        selectionPI.value = data // data for edit selection
+    }
 }
 
 const handleDelete = (data: any) => {
-    selectionPI.value = data // data for edit selection
-    modalDelete.value = !modalDelete.value
+    if (isHasCTDT()) {
+        selectionPI.value = data // data for edit selection
+        modalDelete.value = !modalDelete.value
+    }
+}
+
+const isHasCTDT = () => {
+    if (!props.idCTDT) {
+        useShowToast('Cần chọn chương trình đào tạo', 'warning')
+        return false
+    } else {
+        return true
+    }
 }
 
 const deletePI = useDebounce(async () => {
@@ -42,7 +56,6 @@ const deletePI = useDebounce(async () => {
 })
 
 const refreshData = async () => {
-    console.log('ploIDSelection.value', ploIDSelection.value);
     emit('reloadPLO', ploIDSelection.value)
 }
 </script>
@@ -71,11 +84,11 @@ const refreshData = async () => {
     </LayoutCard>
 
     <!-- Add -->
-    <LazyModalsPIAdd :ploID="ploIDSelection" :isOpenModal="modalAdd" @closeModal="modalAdd = false"
+    <LazyModalsPIAdd :idCTDT="idCTDT" :ploID="ploIDSelection" :isOpenModal="modalAdd" @closeModal="modalAdd = false"
         @refreshData="refreshData" />
 
     <!-- Edit -->
-    <LazyModalsPIEdit :ploId="Number(ploIDSelection)" :data="selectionPI" :isOpenModal="modalState"
+    <LazyModalsPIEdit :idCTDT="idCTDT" :ploId="Number(ploIDSelection)" :data="selectionPI" :isOpenModal="modalState"
         @closeModal="modalState = false" @refreshData="refreshData" />
 
     <!-- Delete -->

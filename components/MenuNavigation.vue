@@ -13,8 +13,14 @@ import { menu } from '~/types/Menu'
 
 const isCorrectRoute = (path: string) => route.params.category === path
 
-const moveTo = (path: string) => {
-    navigateTo(`/dashboard/${path}`)
+const moveTo = async (path: string) => {
+    /* 
+        Make sure to always use await or return on result of navigateTo when calling it 
+        https://nuxt.com/docs/api/utils/navigate-to 
+    */
+    if (!path) return
+
+    await navigateTo(`/dashboard/${path}`)
 }
 
 const handleOpen = (key: string, keyPath: string[]) => {

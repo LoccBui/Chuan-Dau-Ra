@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 const props = defineProps<{
-    isOpenModal: boolean
+    isOpenModal: boolean,
+    idCTDT: number
 }>()
-
 
 const fetchStore = useFetchStore()
 const centerDialogVisible = computed(() => props.isOpenModal)
@@ -29,7 +29,7 @@ const handleAdd = useDebounce(async () => {
     if (!ruleFormRef.value) return
     await ruleFormRef.value.validate(async (valid: boolean) => {
         if (valid) {
-            const { data } = await fetchStore.addNewPLO(form.code, fetchStore.ctdtSelection, form.description)
+            const { data } = await fetchStore.addNewPLO(form.code, props.idCTDT, form.description)
 
             if (data.value) {
                 ruleFormRef.value.resetFields()

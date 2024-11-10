@@ -2,6 +2,7 @@
 import { useDebounce, useDebounceFn } from '@vueuse/core'
 
 const inputValue = ref('')
+const model = defineModel()
 
 const emit = defineEmits(['changeInput'])
 
@@ -17,6 +18,6 @@ const debouncedTest = useDebounceFn(changeInput, 1000)
 <template>
     <div class="flex items-center gap-10">
         <span class="min-w-60">Điểm cần đạt</span>
-        <el-input @keyup="debouncedTest" v-model="inputValue" placeholder="Nhập điểm cần đạt" />
+        <el-input @keyup="debouncedTest" v-model="model" />
     </div>
 </template>

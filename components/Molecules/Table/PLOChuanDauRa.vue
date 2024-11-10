@@ -26,18 +26,31 @@ watch(
     })
 
 const handleEdit = (data: any) => {
-    modalState.value = !modalState.value
-    selectionPLO.value = data // data for edit selection
-
-    console.log(selectionPLO.value);
+    if (isHasCTDT()) {
+        modalState.value = !modalState.value
+        selectionPLO.value = data // data for edit selection
+    }
 }
 
 const handleDelete = () => {
-    modalDelete.value = !modalDelete.value
+    if (isHasCTDT()) {
+        modalDelete.value = !modalDelete.value
+    }
 }
 
 const handleAdd = () => {
-    modalAdd.value = !modalAdd.value
+    if (isHasCTDT()) {
+        modalAdd.value = !modalAdd.value
+    }
+}
+
+const isHasCTDT = () => {
+    if (!props.idCTDT) {
+        useShowToast('Cần chọn chương trình đào tạo', 'warning')
+        return false
+    } else {
+        return true
+    }
 }
 
 const handleRowSelection = (clickedValue: never) => {
@@ -86,11 +99,11 @@ const refreshData = async () => {
 
 
     <!-- Add -->
-    <LazyModalsAddNewPLO :data="selectionPLO" :isOpenModal="modalAdd" @closeModal="modalAdd = false"
+    <LazyModalsAddNewPLO :idCTDT="idCTDT" :data="selectionPLO" :isOpenModal="modalAdd" @closeModal="modalAdd = false"
         @refreshData="refreshData" />
 
     <!-- Edit -->
-    <LazyModalsEditPLO :data="selectionPLO" :isOpenModal="modalState" @closeModal="modalState = false"
+    <LazyModalsEditPLO :idCTDT="idCTDT" :data="selectionPLO" :isOpenModal="modalState" @closeModal="modalState = false"
         @refreshData="refreshData" />
 
     <!-- Delete -->

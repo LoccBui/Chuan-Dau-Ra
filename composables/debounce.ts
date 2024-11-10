@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import _ from "lodash"
 
 export const useDebounce: any = (func: Function, delay = 500) => {
   return _.debounce((...args) => {

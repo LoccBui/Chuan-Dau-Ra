@@ -34,7 +34,7 @@ const reloadPLO = async (ploID) => {
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
             <MoleculesTablePLOChuanDauRa :idCTDT="selectionCTDTId" @changePLOSelection="changePLOSelection" />
-            <MoleculesTablePIChuanDauRa :items="selectionPLO" @reloadPLO="reloadPLO" />
+            <MoleculesTablePIChuanDauRa :idCTDT="selectionCTDTId" :items="selectionPLO" @reloadPLO="reloadPLO" />
         </div>
 
     </LayoutContainer>

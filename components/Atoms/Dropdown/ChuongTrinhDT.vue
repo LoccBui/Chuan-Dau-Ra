@@ -5,10 +5,15 @@ const selection = ref('')
 const fetchStore = useFetchStore()
 const emit = defineEmits(['changeCTDT'])
 
+watch(
+    () => fetchStore.khoaSelection,
+    () => {
+        selection.value = _.get(fetchStore, 'getCTDTbyNganh[0].id', 0)
+        changeSelection()
+    }
+)
+
 const changeSelection = () => {
-    console.log(selection.value);
-    fetchStore.ctdtSelection = selection.value
-    console.log('fetch.ctdtSelection', fetchStore.ctdtSelection);
     emit('changeCTDT', selection.value)
 }
 </script>

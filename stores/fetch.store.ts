@@ -13,7 +13,6 @@ export const useFetchStore = defineStore({
     khoaSelection: "",
     nganhSelection: "",
     CTDT: [],
-    ctdtSelection: -1,
   }),
   getters: {
     getNganhByKhoa: (state) => {
@@ -32,10 +31,6 @@ export const useFetchStore = defineStore({
   },
   actions: {
     async fetchResources() {
-      if (_.isEmpty(this.faculties)) {
-        await this.fetchKhoa()
-      }
-
       if (_.isEmpty(this.CTDT)) {
         await this.fetchCTDT()
       }
@@ -109,6 +104,24 @@ export const useFetchStore = defineStore({
       }
 
       const data = _.get(items.value, "data", [])
+
+      return { data, pending, error }
+    },
+
+    async fetchMonHocVaPLOTable(idCTDT: number) {
+      const {
+        data: items,
+        error,
+        pending,
+      } = await useAuthFetch(
+        `${useApiConnector()}/subjects?eduProgramId=${idCTDT}`
+      )
+
+      if (error.value) {
+        items.value = []
+      }
+
+      const data = computed(() => _.get(items.value, "data", []))
 
       return { data, pending, error }
     },
