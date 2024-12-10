@@ -8,13 +8,20 @@ const emit = defineEmits(['changeNganh'])
 watch(
     () => fetchStore.khoaSelection,
     () => {
+        console.log('watch khoa change');
         selection.value = fetchStore.faculties[0]
         changeSelection()
+    },
+    {
+        deep: true
     }
 )
 
 const changeSelection = () => {
     fetchStore.nganhSelection = selection.value
+    
+    const nganhDataSelections = fetchStore.getNganhByKhoa.programs.find((nganh) => nganh.name === selection.value )
+    emit('changeNganh', nganhDataSelections)
 }
 </script>
 

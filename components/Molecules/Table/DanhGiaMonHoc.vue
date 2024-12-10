@@ -12,7 +12,8 @@ const { data, pending } = await fetchStore.fetchDanhGiaMonHoc()
 const paginatedData = computed(() => {
     let start = (currentPage.value - 1) * pageSize
     let end = start + pageSize
-    if (!_.isEmpty(data.value)) return data.value.slice(start, end)
+    if (!_.isEmpty(data.value)) 
+        return data.value.slice(start, end)
 })
 
 // Functions

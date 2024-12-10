@@ -35,6 +35,22 @@ export const useFetchStore = defineStore({
         await this.fetchCTDT()
       }
     },
+    
+    async fetchPIs(ploId: number, eduProgramId: number) {
+      const {
+        data: items,
+        error,
+        pending,
+      } = await useAuthFetch(`${useApiConnector()}/pis?ploId=${ploId}&eduProgramId=${eduProgramId}`)
+
+      if (error.value) {
+        items.value = []
+      }
+      
+      const data = _.get(items.value, "data.pis", [])
+
+      return { data, pending, error }
+    },
 
     //Requires auth fetching
     async fetchKhoa() {

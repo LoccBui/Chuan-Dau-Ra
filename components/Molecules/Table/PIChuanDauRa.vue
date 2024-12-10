@@ -17,7 +17,7 @@ const modalAdd = ref<boolean>(false)
 const ploIDSelection = computed(() => _.get(props, 'items[0].id', ''))
 const selectionPI = ref(null)
 
-const emit = defineEmits(['reloadPLO'])
+const emit = defineEmits(['reloadPLO', 'changePISelection'])
 
 const handleAdd = () => {
     if (isHasCTDT()) modalAdd.value = !modalAdd.value
@@ -55,6 +55,11 @@ const deletePI = useDebounce(async () => {
     }
 })
 
+const handleRowSelection = (clickedValue: never) => {
+    console.log('object row selection', clickedValue);
+    emit('changePISelection', [clickedValue])
+}
+
 const refreshData = async () => {
     emit('reloadPLO', ploIDSelection.value)
 }
@@ -68,7 +73,7 @@ const refreshData = async () => {
             Thêm
         </el-button>
 
-        <el-table :data="_.get(props, 'items[0].pis', [])">
+        <el-table @row-click="handleRowSelection" :data="_.get(props, 'items', [])" class="cursor-pointer" highlight-current-row>
             <el-table-column prop="code" label="PI" width="80" />
             <el-table-column prop="description" label="Nội dung PI" width="400" />
             <el-table-column fixed="right">

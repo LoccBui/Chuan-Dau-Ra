@@ -6,6 +6,7 @@ const emit = defineEmits(['changeKhoa'])
 const { data: listFaculties, pending } = await fetchStore.fetchKhoa()
 
 const changeSelection = () => {
+    console.log('changeSelection khoa');
     fetchStore.khoaSelection = selection.value
 }
 </script>

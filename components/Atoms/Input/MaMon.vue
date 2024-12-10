@@ -14,7 +14,7 @@ const debouncedInput = useDebounceFn(changeInput, 1000)
 
 <template>
     <div class="flex items-center gap-10">
-        <span class="min-w-60">Mã môn</span>
+        <span class="min-w-60">Mã môn </span>
         <el-input @keyup="debouncedInput" v-model="model" />
     </div>
 </template>
