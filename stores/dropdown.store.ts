@@ -40,6 +40,24 @@ export const useDropdownStore = defineStore({
 
       return { data, pending }
     },
+
+    async fetchDropdownChuongTrinhDaoTao() {
+      const { data: res, pending } = await useAuthFetch(
+        useApiConnector() + "/education-programs"
+      )
+
+      const data = computed(() => {
+        if (res.value) {
+          return get(res.value, "data.educationPrograms", [])
+        }
+
+        return []
+      })
+
+      return { data, pending }
+    },
+
+    //
   },
 })
 

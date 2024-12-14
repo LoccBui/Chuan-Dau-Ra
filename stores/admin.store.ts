@@ -98,6 +98,140 @@ export const useAdminStore = defineStore({
 
       return { data, pending }
     },
+
+    async fetchListMonHoc() {
+      const {
+        data: res,
+        pending,
+        refresh,
+      } = await useAuthFetch(useApiConnector() + "/subjects")
+
+      const data = computed(() => {
+        if (res.value) {
+          return get(res.value, "data.subjects", [])
+        }
+
+        return []
+      })
+
+      return { data, pending, refresh }
+    },
+
+    async addMonHoc(
+      code: string,
+      name: string,
+      soTiet: number,
+      soTinChi: number
+    ) {
+      const { data, pending, error } = await useAuthFetch(
+        useApiConnector() + "/subjects",
+        {
+          method: "POST",
+          body: {
+            code,
+            name,
+            soTiet,
+            soTinChi,
+            eduProgramIds: [],
+          },
+        }
+      )
+
+      if (data.value) {
+        useShowToast("Thêm thành công", "success")
+      } else {
+        useShowToast(get(error.value, "data.message", "Thêm thất bạn"), "error")
+      }
+
+      return { data, pending }
+    },
+
+    async deleteMonHoc(subjectIds: any) {
+      const { data, pending, error } = await useAuthFetch(
+        useApiConnector() + "/subjects",
+        {
+          method: "DELETE",
+          body: {
+            subjectIds: [subjectIds],
+          },
+        }
+      )
+
+      if (data.value) {
+        useShowToast("Xóa thành công", "success")
+      } else {
+        useShowToast(get(error.value, "data.message", "Xóa thất bạn"), "error")
+      }
+
+      return { data, pending }
+    },
+
+    async editMonHoc(
+      subjectId: string,
+      code: string,
+      name: string,
+      soTiet: number,
+      soTinChi: number
+    ) {
+      const { data, pending, error } = await useAuthFetch(
+        useApiConnector() + `/subjects/${subjectId}`,
+        {
+          method: "PATCH",
+          body: {
+            code,
+            name,
+            soTiet,
+            soTinChi,
+            eduProgramIds: [], //chương trình đào tạo
+          },
+        }
+      )
+
+      if (data.value) {
+        useShowToast("Sửa thành công", "success")
+      } else {
+        useShowToast(get(error.value, "data.message", "Sửa thất bạn"), "error")
+      }
+
+      return { data, pending }
+    },
+
+    async addMultipleCTDTToMonHoc(idSubject: string, listCTDT: []) {
+      const { data, pending, error } = await useAuthFetch(
+        useApiConnector() + `/subjects/${idSubject}`,
+        {
+          method: "PATCH",
+          body: {
+            eduProgramIds: listCTDT,
+          },
+        }
+      )
+
+      if (data.value) {
+        useShowToast("Lưu thành công", "success")
+      } else {
+        useShowToast(get(error.value, "data.message", "Lưu thất bạn"), "error")
+      }
+
+      return { data, pending }
+    },
+
+    async fetchChuongTrinhDaoTaoById(educationProgramsId: number) {
+      const { data: res, pending } = await useAuthFetch(
+        useApiConnector() + `/subjects?eduProgramId=${educationProgramsId}`
+      )
+
+      const data = computed(() => {
+        if (res.value) {
+          return get(res.value, "data.subjects", [])
+        }
+
+        return []
+      })
+
+      return { data, pending }
+    },
+    //
   },
 })
 
