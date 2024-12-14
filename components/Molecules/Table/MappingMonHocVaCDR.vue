@@ -1,6 +1,11 @@
 <script lang="ts" setup>
 import _ from 'lodash'
 
+const props = defineProps<{
+    idCTDT: string | number
+    schoolYear: string
+}>()
+
 const fetchStore = useFetchStore()
 const modalState = ref<boolean>(false)
 const modalDelete = ref<boolean>(false)

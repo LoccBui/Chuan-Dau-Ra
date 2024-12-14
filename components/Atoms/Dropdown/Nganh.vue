@@ -19,8 +19,7 @@ watch(
 
 const changeSelection = () => {
     fetchStore.nganhSelection = selection.value
-    
-    const nganhDataSelections = fetchStore.getNganhByKhoa.programs.find((nganh) => nganh.name === selection.value )
+    const nganhDataSelections = fetchStore.getNganhByKhoa.programs.find((nganh) => nganh.name === selection.value)
     emit('changeNganh', nganhDataSelections)
 }
 </script>
