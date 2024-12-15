@@ -7,7 +7,6 @@ const props = defineProps<{
 }>()
 
 // Store
-const fetchStore = useFetchStore()
 
 // States
 const modalAdd = ref<boolean>(false)
@@ -46,21 +45,18 @@ const setPage = (page: number) => {
 
 const addCLo = (data: any) => {
     modalAdd.value = true // Open modal
-    
+
     const schoolYearItem = listYears.value?.find((year, yearIndex) => yearIndex == data)
-    
-    
-    console.log(schoolYearItem);
+
     schoolYear.value = schoolYearItem?.id ?? ''
 }
 </script>
 
 <template>
-    <LayoutCard>        
+    <LayoutCard>
         <AtomsHeading class="text-center" type="sub" title="Mục tiêu PLO" />
-        
-        <!-- <table v-if="!_.isEmpty(props.data)"> -->
-        <table>
+
+        <table v-if="_.size(props.data) > 0">
             <!-- heading -->
             <tr>
                 <th v-for="year in listYears" :key="year.id"> {{ year.id }} </th>
@@ -74,10 +70,13 @@ const addCLo = (data: any) => {
                 </td>
             </tr>
         </table>
-        
+
+        <p v-else> Cần chọn PLO</p>
+
     </LayoutCard>
-    
-    <ModalsMonHocVaCLOPLOTargerAdd :schoolYear="schoolYear" :ploId="idPLOTargets" :isOpenModal="modalAdd" @closeModal="modalAdd = false" />
+
+    <ModalsMonHocVaCLOPLOTargerAdd :schoolYear="schoolYear" :ploId="idPLOTargets" :isOpenModal="modalAdd"
+        @closeModal="modalAdd = false" />
 </template>
 
 <style lang="scss" scoped>

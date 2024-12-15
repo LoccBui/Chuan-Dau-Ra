@@ -20,15 +20,14 @@ listYears.value = _.get(yearsData.value, 'data.schoolYears', []) // Get list yea
 
 const listClosTargets = computed(() => {
     const listClos = ref(_.get(props.data[0], 'piTargets', []))
-    
+
     const res = listYears.value.map((year) => {
         const matchingItem = listClos.value.find((cloItem) => cloItem.schoolYear?.id === year.id);
         return matchingItem || null
     })
-    
+
     return res
 })
-
 
 // Functions
 const handleClick = () => {
@@ -41,9 +40,9 @@ const setPage = (page: number) => {
 
 const addCLo = (data: any) => {
     modalAdd.value = true // Open modal
-    
+
     const schoolYearItem = listYears.value?.find((year, yearIndex) => yearIndex == data)
-    
+
     schoolYear.value = schoolYearItem?.id ?? ''
 }
 
@@ -53,11 +52,10 @@ const refreshData = () => {
 </script>
 
 <template>
-    <LayoutCard>        
+    <LayoutCard>
         <AtomsHeading class="text-center" type="sub" title="Mục tiêu PI" />
-        
-        <!-- <table v-if="!_.isEmpty(props.data)"> -->
-        <table>
+
+        <table v-if="_.size(props.data) > 0">
             <!-- heading -->
             <tr>
                 <th v-for="year in listYears" :key="year.id"> {{ year.id }} </th>
@@ -71,10 +69,13 @@ const refreshData = () => {
                 </td>
             </tr>
         </table>
-        
+
+        <p v-else> Cần chọn PI</p>
+
     </LayoutCard>
-    
-    <ModalsMonHocVaCLOPITargetAdd :schoolYear="schoolYear" :piId="idPISelections" :isOpenModal="modalAdd" @closeModal="modalAdd = false" @refreshData="refreshData" />
+
+    <ModalsMonHocVaCLOPITargetAdd :schoolYear="schoolYear" :piId="idPISelections" :isOpenModal="modalAdd"
+        @closeModal="modalAdd = false" @refreshData="refreshData" />
 </template>
 
 <style lang="scss" scoped>

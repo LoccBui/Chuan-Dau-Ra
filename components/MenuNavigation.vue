@@ -110,7 +110,7 @@ const handleClose = (key: string, keyPath: string[]) => {
                 <template #title>Admin</template>
             </el-menu-item>
 
-            <el-menu :collapse="isCollapse" @open="handleOpen" @close="handleClose">
+            <!-- <el-menu :collapse="isCollapse" @open="handleOpen" @close="handleClose">
                 <el-sub-menu class="!min-w-fit" index="1">
                     <template #title>
                         <Icon name="tabler:report-search" />
@@ -136,7 +136,7 @@ const handleClose = (key: string, keyPath: string[]) => {
                     <el-menu-item index="1-1">Quản lý user</el-menu-item>
                     <el-menu-item index="1-1">Đổi mật khẩu</el-menu-item>
                 </el-sub-menu>
-            </el-menu>
+            </el-menu> -->
 
             <!-- Log out -->
             <el-menu-item class="!sticky !bottom-0 w-full !border-t-[.5px] hover:!bg-red-500/5" @click="auth.logOut()">
