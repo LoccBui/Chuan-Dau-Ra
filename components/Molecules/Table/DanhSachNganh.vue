@@ -59,10 +59,20 @@ const handleDelete = (rowSelection: object) => {
 
 const confirmDelete = async () => {
   const { data } = await adminStore.deleteNganh(Number(deleteId.value))
+  modalDelete.value = false
+  refresh()
 }
 
-const refresh = () => {
+const refresh = async () => {
+  isLoading.value = true
 
+  const { data, pending } = await useAuthFetch(useApiConnector() + `/programs?faculityId=${facultyId.value}`)
+
+  if (data.value) {
+    tableData.value = _.get(data.value, 'data.programs', [])
+  }
+
+  isLoading.value = pending.value
 }
 </script>
 
@@ -97,8 +107,8 @@ const refresh = () => {
   <ModalsAdminAddNganh :facultyId="facultyId" :isOpenModal="modalAdd" title="Thêm ngành" @refreshData="refresh"
     @closeModal="modalAdd = false" />
 
-  <ModalsAdminEditNganh :data="editData" :isOpenModal="modalEdit" title="Sửa ngành" @refreshData="refresh"
-    @closeModal="modalEdit = false" />
+  <ModalsAdminEditNganh :facultyId="facultyId" :dataKhoa="dataKhoa" :data="editData" :isOpenModal="modalEdit"
+    title="Sửa ngành" @refreshData="refresh" @closeModal="modalEdit = false" />
 
   <LazyModalsDeteleAction :isOpenModal="modalDelete" title="Xóa ngành" @confirm-delete="confirmDelete"
     @closeModal="modalDelete = false" />

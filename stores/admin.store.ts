@@ -327,7 +327,7 @@ export const useAdminStore = defineStore({
       programId: string,
       code: string,
       name: string,
-      facultyID: number
+      facultyId: number
     ) {
       const { data, pending, error } = await useAuthFetch(
         useApiConnector() + `/programs/${programId}`,
@@ -336,7 +336,7 @@ export const useAdminStore = defineStore({
           body: {
             code,
             name,
-            facultyID,
+            facultyId,
           },
         }
       )
@@ -393,19 +393,19 @@ export const useAdminStore = defineStore({
     },
 
     async editCTDT(
-      educationProgramsId: string,
-      code: string,
+      eduProgramId: string,
       name: string,
-      facultyID: number
+      code: string,
+      programId: number
     ) {
       const { data, pending, error } = await useAuthFetch(
-        useApiConnector() + `/programs/${educationProgramsId}`,
+        useApiConnector() + `/education-programs/${eduProgramId}`,
         {
           method: "PATCH",
           body: {
             code,
             name,
-            facultyID,
+            programId,
           },
         }
       )
@@ -419,13 +419,13 @@ export const useAdminStore = defineStore({
       return { data, pending }
     },
 
-    async deleteCTDT(programsIds: number) {
+    async deleteCTDT(eduProgramsIds: number) {
       const { data, pending, error } = await useAuthFetch(
-        useApiConnector() + "/programs",
+        useApiConnector() + "/education-programs",
         {
           method: "DELETE",
           body: {
-            programIds: [programsIds],
+            educationProgramIds: [eduProgramsIds],
           },
         }
       )

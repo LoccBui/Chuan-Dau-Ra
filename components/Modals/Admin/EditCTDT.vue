@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import { get } from 'lodash'
+import { get, isEmpty } from 'lodash'
 
 const props = defineProps<{
     isOpenModal: boolean
     data: object
+    dataNganh: object
 }>()
 
 // Store
@@ -13,12 +14,12 @@ const adminStore = useAdminStore()
 const centerDialogVisible = computed(() => props.isOpenModal)
 const emit = defineEmits(['closeModal', 'refreshData'])
 const facultyId = ref('')
+const programId = ref('')
 
 const ruleFormRef = ref()
 const form = reactive({
     code: '',
     name: '',
-    description: '',
 })
 
 const rules = reactive({
@@ -27,9 +28,6 @@ const rules = reactive({
     ],
     name: [
         { required: true, message: 'Vui lòng nhập tên khoa', trigger: 'blur' },
-    ],
-    description: [
-        { required: true, message: 'Vui lòng nhập mô tả khoa', trigger: 'blur' },
     ],
 })
 
@@ -43,17 +41,29 @@ const initializeData = () => {
     facultyId.value = get(props.data, 'id', '')
     form.code = get(props.data, 'code', '')
     form.name = get(props.data, 'name', '')
-    form.description = get(props.data, 'description', '')
 }
 
 const handleEdit = async () => {
-    const { data } = await adminStore.editKhoa(facultyId.value, form.code, form.name, form.description)
+    const idNganh = ref('')
+
+    if (!programId.value) {
+        idNganh.value = props.dataNganh?.id // Old id
+    } else {
+        idNganh.value = programId.value // new id
+    }
+
+    const { data } = await adminStore.editCTDT(String(facultyId.value), form.name, form.code, Number(idNganh.value))
 
     if (data.value) {
         emit('refreshData')
     }
 
     closeModal()
+}
+
+const changeNganh = (item: any) => {
+    programId.value = ''
+    programId.value = item?.id // New nganh
 }
 </script>
 
@@ -69,9 +79,12 @@ const handleEdit = async () => {
             <el-form-item label="Tên khoa" prop="name">
                 <el-input placeholder="Nhập tên khoa" v-model="form.name" />
             </el-form-item>
-            <el-form-item label="Mô tả khoa" prop="soTiet">
-                <el-input placeholder="Nhập mô tả khoa" v-model="form.description" />
-            </el-form-item>
+
+            <AtomsDropdownKhoa />
+
+            <div class="mt-4">
+                <AtomsDropdownNganh @changeNganh="changeNganh" />
+            </div>
         </el-form>
 
         <template #footer>

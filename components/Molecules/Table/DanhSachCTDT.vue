@@ -14,6 +14,7 @@ const adminStore = useAdminStore()
 const modalAdd = ref<boolean>(false)
 const modalEdit = ref<boolean>(false)
 const modalDelete = ref<boolean>(false)
+const isLoading = ref<boolean>(false)
 
 const programId = ref('')
 const pageSize = 10
@@ -51,10 +52,25 @@ const setPage = (page: number) => {
     currentPage.value = page
 }
 
-const confirmDelete = () => {
+const confirmDelete = async () => {
+    const { data } = await adminStore.deleteCTDT(Number(deleteId.value))
+
+    modalDelete.value = false
+
+    refresh()
 }
 
-const refresh = () => { }
+const refresh = async () => {
+    isLoading.value = true
+
+    const { data, pending } = await useAuthFetch(useApiConnector() + `/education-programs?programId=${programId.value}`)
+
+    if (data.value) {
+        tableData.value = _.get(data.value, 'data.educationPrograms', [])
+    }
+
+    isLoading.value = pending.value
+}
 </script>
 
 <template>
@@ -66,7 +82,7 @@ const refresh = () => { }
             Thêm
         </el-button>
 
-        <el-table :data="paginatedData" empty-text="Không có dữ liệu">
+        <el-table v-loading="isLoading" :data="paginatedData" empty-text="Không có dữ liệu">
             <el-table-column prop="code" label="Mã CTDT" />
             <el-table-column prop="name" label="Tên CTDT" />
             <el-table-column fixed="right">
@@ -87,8 +103,8 @@ const refresh = () => { }
     <ModalsAdminAddCTDT :programId="programId" :isOpenModal="modalAdd" title="Thêm chương trình đào tạo"
         @refreshData="refresh" @closeModal="modalAdd = false" />
 
-    <ModalsAdminEditCTDT :data="editData" :isOpenModal="modalEdit" title="Sửa chương trình đào tạo"
-        @refreshData="refresh" @closeModal="modalEdit = false" />
+    <ModalsAdminEditCTDT :dataNganh="dataNganh" :programId="programId" :data="editData" :isOpenModal="modalEdit"
+        title="Sửa chương trình đào tạo" @refreshData="refresh" @closeModal="modalEdit = false" />
 
     <ModalsDeteleAction :isOpenModal="modalDelete" title="Xóa khoa" @confirm-delete="confirmDelete"
         @closeModal="modalDelete = false" />
