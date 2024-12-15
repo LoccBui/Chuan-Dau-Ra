@@ -231,6 +231,76 @@ export const useAdminStore = defineStore({
 
       return { data, pending }
     },
+
+    async addNewKhoa(code: string, name: string, description: string) {
+      const { data, pending, error } = await useAuthFetch(
+        useApiConnector() + "/faculties",
+        {
+          method: "POST",
+          body: {
+            code,
+            name,
+            description,
+          },
+        }
+      )
+
+      if (data.value) {
+        useShowToast("Thêm thành công", "success")
+      } else {
+        useShowToast(get(error.value, "data.message", "Thêm thất bạn"), "error")
+      }
+
+      return { data, pending }
+    },
+
+    async editKhoa(
+      facultyID: string,
+      code: string,
+      name: string,
+      description: string
+    ) {
+      const { data, pending, error } = await useAuthFetch(
+        useApiConnector() + `/faculties/${facultyID}`,
+        {
+          method: "PATCH",
+          body: {
+            code,
+            name,
+            description,
+          },
+        }
+      )
+
+      if (data.value) {
+        useShowToast("Sửa thành công", "success")
+      } else {
+        useShowToast(get(error.value, "data.message", "Sửa thất bạn"), "error")
+      }
+
+      return { data, pending }
+    },
+
+    async deleteKhoa(facultyIds: string) {
+      const { data, pending, error } = await useAuthFetch(
+        useApiConnector() + "/faculties",
+        {
+          method: "DELETE",
+          body: {
+            facultyIds: [facultyIds],
+          },
+        }
+      )
+
+      if (data.value) {
+        useShowToast("Xóa thành công", "success")
+      } else {
+        useShowToast(get(error.value, "data.message", "Xóa thất bạn"), "error")
+      }
+
+      return { data, pending }
+    },
+
     //
   },
 })
