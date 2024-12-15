@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import _ from 'lodash'
 
-
 // Store
 const fetchStore = useFetchStore()
 const adminStore = useAdminStore()
@@ -15,6 +14,7 @@ const currentPage = ref(1)
 const deleteId = ref('')
 const editData = ref({})
 const isLoading = ref<boolean>(false)
+const emit = defineEmits(['changeRowSelection'])
 
 const tableData = computed(() => {
     return fetchStore.faculties
@@ -61,7 +61,7 @@ const setPage = (page: number) => {
 }
 
 const handleRowSelection = (dataRow: any) => {
-    console.log(dataRow);
+    emit('changeRowSelection', dataRow)
 }
 </script>
 

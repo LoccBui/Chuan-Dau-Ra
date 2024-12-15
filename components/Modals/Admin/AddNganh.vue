@@ -3,6 +3,7 @@ import { get } from 'lodash'
 
 const props = defineProps<{
     isOpenModal: boolean
+    facultyId: string | number
 }>()
 
 // Store
@@ -16,18 +17,14 @@ const ruleFormRef = ref()
 const form = reactive({
     code: '',
     name: '',
-    description: '',
 })
 
 const rules = reactive({
     code: [
-        { required: true, message: 'Vui lòng nhập mã khoa', trigger: 'blur' },
+        { required: true, message: 'Vui lòng nhập mã ngành', trigger: 'blur' },
     ],
     name: [
-        { required: true, message: 'Vui lòng nhập tên khoa', trigger: 'blur' },
-    ],
-    description: [
-        { required: true, message: 'Vui lòng nhập mô tả khoa', trigger: 'blur' },
+        { required: true, message: 'Vui lòng nhập tên ngành', trigger: 'blur' },
     ],
 })
 
@@ -41,10 +38,11 @@ const handleAdd = useDebounce(async () => {
     if (!ruleFormRef.value) return
     await ruleFormRef.value.validate(async (valid: boolean) => {
         if (valid) {
-            const { data } = await adminStore.addNewKhoa(form.code, form.name, form.description)
+            const { data } = await adminStore.addNganh(form.code, form.name, Number(props.facultyId))
 
             if (data.value) {
                 emit('refreshData')
+                closeModal()
             }
         }
     })
@@ -56,14 +54,11 @@ const handleAdd = useDebounce(async () => {
 
         <el-form class="w-full" ref="ruleFormRef" :rules="rules" label-position="top" label-width="auto" :model="form"
             status-icon>
-            <el-form-item label="Mã khoa" prop="code">
-                <el-input placeholder="Nhập mã khoa" v-model="form.code" autofocus />
+            <el-form-item label="Mã ngành" prop="code">
+                <el-input placeholder="Nhập mã ngành" v-model="form.code" autofocus />
             </el-form-item>
-            <el-form-item label="Tên khoa" prop="name">
-                <el-input placeholder="Nhập tên khoa" v-model="form.name" />
-            </el-form-item>
-            <el-form-item label="Mô tả khoa">
-                <el-input placeholder="Nhập mô tả khoa" v-model="form.description" />
+            <el-form-item label="Tên ngành" prop="name">
+                <el-input placeholder="Nhập tên ngành" v-model="form.name" />
             </el-form-item>
         </el-form>
 

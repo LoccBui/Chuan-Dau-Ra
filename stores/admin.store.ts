@@ -301,6 +301,144 @@ export const useAdminStore = defineStore({
       return { data, pending }
     },
 
+    async addNganh(code: string, name: string, facultyId: number) {
+      const { data, pending, error } = await useAuthFetch(
+        useApiConnector() + "/programs",
+        {
+          method: "POST",
+          body: {
+            code,
+            name,
+            facultyId,
+          },
+        }
+      )
+
+      if (data.value) {
+        useShowToast("Thêm thành công", "success")
+      } else {
+        useShowToast(get(error.value, "data.message", "Thêm thất bạn"), "error")
+      }
+
+      return { data, pending }
+    },
+
+    async editNganh(
+      programId: string,
+      code: string,
+      name: string,
+      facultyID: number
+    ) {
+      const { data, pending, error } = await useAuthFetch(
+        useApiConnector() + `/programs/${programId}`,
+        {
+          method: "PATCH",
+          body: {
+            code,
+            name,
+            facultyID,
+          },
+        }
+      )
+
+      if (data.value) {
+        useShowToast("Sửa thành công", "success")
+      } else {
+        useShowToast(get(error.value, "data.message", "Sửa thất bạn"), "error")
+      }
+
+      return { data, pending }
+    },
+
+    async deleteNganh(programsIds: number) {
+      const { data, pending, error } = await useAuthFetch(
+        useApiConnector() + "/programs",
+        {
+          method: "DELETE",
+          body: {
+            programIds: [programsIds],
+          },
+        }
+      )
+
+      if (data.value) {
+        useShowToast("Xóa thành công", "success")
+      } else {
+        useShowToast(get(error.value, "data.message", "Xóa thất bạn"), "error")
+      }
+
+      return { data, pending }
+    },
+
+    async addCTDT(programId: string, code: string, name: string) {
+      const { data, pending, error } = await useAuthFetch(
+        useApiConnector() + "/education-programs",
+        {
+          method: "POST",
+          body: {
+            code,
+            name,
+            programId,
+          },
+        }
+      )
+
+      if (data.value) {
+        useShowToast("Thêm thành công", "success")
+      } else {
+        useShowToast(get(error.value, "data.message", "Thêm thất bạn"), "error")
+      }
+
+      return { data, pending }
+    },
+
+    async editCTDT(
+      educationProgramsId: string,
+      code: string,
+      name: string,
+      facultyID: number
+    ) {
+      const { data, pending, error } = await useAuthFetch(
+        useApiConnector() + `/programs/${educationProgramsId}`,
+        {
+          method: "PATCH",
+          body: {
+            code,
+            name,
+            facultyID,
+          },
+        }
+      )
+
+      if (data.value) {
+        useShowToast("Sửa thành công", "success")
+      } else {
+        useShowToast(get(error.value, "data.message", "Sửa thất bạn"), "error")
+      }
+
+      return { data, pending }
+    },
+
+    async deleteCTDT(programsIds: number) {
+      const { data, pending, error } = await useAuthFetch(
+        useApiConnector() + "/programs",
+        {
+          method: "DELETE",
+          body: {
+            programIds: [programsIds],
+          },
+        }
+      )
+
+      if (data.value) {
+        useShowToast("Xóa thành công", "success")
+      } else {
+        useShowToast(get(error.value, "data.message", "Xóa thất bạn"), "error")
+      }
+
+      return { data, pending }
+    },
+
     //
   },
 })

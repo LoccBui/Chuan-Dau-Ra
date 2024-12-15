@@ -2,16 +2,12 @@
 import type { TabsPaneContext } from 'element-plus'
 
 const activeName = ref<string>('first')
-
-const handleClick = (tab: TabsPaneContext, event: Event) => {
-    console.log(tab, event)
-}
 </script>
 
 <template>
     <div class="w-full h-screen">
 
-        <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tabs v-model="activeName">
 
             <el-tab-pane label="Sinh viên" name="first">
                 <LazyMoleculesAdminDanhSachSinhVien />
